@@ -3,11 +3,12 @@
 import { useEffect } from "react";
 import Lenis from "lenis";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
+import { isTouchDevice } from "@/lib/device";
 import { useReducedMotion } from "./use-reduced-motion";
 
 let instance: Lenis | null = null;
 
-/** Access the global Lenis instance (null on server / reduced motion). */
+/** Access the global Lenis instance (null on server / reduced motion / touch). */
 export function getLenis(): Lenis | null {
   return instance;
 }
@@ -15,18 +16,24 @@ export function getLenis(): Lenis | null {
 /**
  * Initializes global smooth scroll and keeps GSAP ScrollTrigger in sync.
  * Mounted once via `<SmoothScroll />` in the root layout.
- * Automatically disabled when the user prefers reduced motion.
+ *
+ * Touch devices keep native scrolling — Lenis + many pinned sections
+ * feels laggy on phones. Desktop gets a softer, synced Lenis curve.
  */
 export function useLenis() {
   const reducedMotion = useReducedMotion();
 
   useEffect(() => {
-    if (reducedMotion) return;
+    if (reducedMotion || isTouchDevice()) return;
 
     const lenis = new Lenis({
-      lerp: 0.14,
+      // Lower lerp = silkier catch-up (was 0.14 / snappier but choppier)
+      lerp: 0.09,
+      wheelMultiplier: 0.85,
+      touchMultiplier: 1.2,
+      syncTouch: false,
+      smoothWheel: true,
       anchors: true,
-      // Avoid fighting the preloader / first paint
       autoRaf: false,
     });
     instance = lenis;
@@ -34,7 +41,11 @@ export function useLenis() {
     lenis.on("scroll", ScrollTrigger.update);
     const tick = (time: number) => lenis.raf(time * 1000);
     gsap.ticker.add(tick);
-    gsap.ticker.lagSmoothing(0);
+    // Mild lag smoothing keeps scrub stable after tab switches without
+    // dropping long stretches of frames (0 made catch-up feel stuttery).
+    gsap.ticker.lagSmoothing(500, 33);
+
+    requestAnimationFrame(() => ScrollTrigger.refresh());
 
     return () => {
       gsap.ticker.remove(tick);

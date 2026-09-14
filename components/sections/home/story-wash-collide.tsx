@@ -209,9 +209,10 @@ export function StoryWashCollide() {
         }
       }
 
-      // Paper grain overlay
-      ctx.globalAlpha = 0.06;
-      for (let i = 0; i < 400; i++) {
+      // Paper grain overlay — keep light; full loops are expensive on mobile
+      const grainN = w < 700 ? 120 : 240;
+      ctx.globalAlpha = 0.05;
+      for (let i = 0; i < grainN; i++) {
         const gx = (i * 47) % w;
         const gy = (i * 89) % h;
         ctx.fillStyle = i % 2 === 0 ? "#000" : "#fff";
@@ -220,27 +221,28 @@ export function StoryWashCollide() {
       ctx.globalAlpha = 1;
     };
 
+    let lastPainted = -1;
     const loop = () => {
-      paint();
+      const p = progressRef.current;
+      // Only redraw when progress moved enough — saves GPU while idle
+      if (Math.abs(p - lastPainted) > 0.002) {
+        lastPainted = p;
+        paint();
+      }
       rafRef.current = requestAnimationFrame(loop);
     };
 
     resize();
     paint();
-    // Only continuous RAF while section might be active — paint on progress change is enough
-    // but scrub can jump; keep a light loop when visible via IntersectionObserver
     const io = new IntersectionObserver(
       ([entry]) => {
         cancelAnimationFrame(rafRef.current);
         if (entry.isIntersecting) {
-          const tick = () => {
-            paint();
-            rafRef.current = requestAnimationFrame(tick);
-          };
-          tick();
+          lastPainted = -1;
+          loop();
         }
       },
-      { rootMargin: "20% 0px" },
+      { rootMargin: "15% 0px" },
     );
     io.observe(canvas);
 

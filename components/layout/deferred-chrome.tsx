@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
+import { getQualityTier, isTouchDevice } from "@/lib/device";
 
 /**
  * Decorative chrome that isn't needed for first paint.
@@ -28,19 +29,24 @@ const SmoothScroll = dynamic(
 
 export function DeferredChrome() {
   const [ready, setReady] = useState(false);
+  const [showGrain, setShowGrain] = useState(false);
+  const [showCursor, setShowCursor] = useState(false);
 
   useEffect(() => {
-    const enable = () => setReady(true);
-
-    if (typeof window === "undefined") return;
+    const enable = () => {
+      setReady(true);
+      setShowGrain(getQualityTier() === "high");
+      setShowCursor(!isTouchDevice());
+    };
 
     let idleId: number | undefined;
     let timeoutId: ReturnType<typeof setTimeout> | undefined;
 
+    // Mount Lenis ASAP after first paint for smoother scroll feel
     if (typeof window.requestIdleCallback === "function") {
-      idleId = window.requestIdleCallback(enable, { timeout: 1200 });
+      idleId = window.requestIdleCallback(enable, { timeout: 450 });
     } else {
-      timeoutId = setTimeout(enable, 400);
+      timeoutId = setTimeout(enable, 180);
     }
 
     return () => {
@@ -54,8 +60,8 @@ export function DeferredChrome() {
   return (
     <>
       <SmoothScroll />
-      <CustomCursor />
-      <GrainOverlay />
+      {showCursor ? <CustomCursor /> : null}
+      {showGrain ? <GrainOverlay /> : null}
     </>
   );
 }

@@ -12,6 +12,16 @@ import { useGSAP } from "@gsap/react";
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, SplitText, useGSAP);
   gsap.defaults({ ease: "power3.out", duration: 1 });
+  ScrollTrigger.config({
+    // Avoid expensive full refreshes on mobile URL-bar resize
+    ignoreMobileResize: true,
+    autoRefreshEvents: "visibilitychange,DOMContentLoaded,load",
+  });
+  ScrollTrigger.defaults({
+    anticipatePin: 1,
+    fastScrollEnd: true,
+    preventOverlaps: true,
+  });
 }
 
 /** House easing curves — keep motion consistent across the site. */

@@ -193,8 +193,10 @@ export function ScrollPainting() {
         g.addColorStop(1, "#ddd2c0");
         ctx.fillStyle = g;
         ctx.fillRect(0, 0, cssW, cssH);
+        // Fewer speckles on weak / touch devices
+        const dots = window.matchMedia("(pointer: coarse)").matches ? 60 : 140;
         ctx.fillStyle = "rgba(70,50,30,0.03)";
-        for (let i = 0; i < 220; i++) {
+        for (let i = 0; i < dots; i++) {
           ctx.fillRect((i * 97) % cssW, (i * 53) % cssH, 1.1, 1.1);
         }
       };
@@ -272,7 +274,8 @@ export function ScrollPainting() {
         const parent = canvas.parentElement;
         if (!parent) return;
         const rect = parent.getBoundingClientRect();
-        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const coarse = window.matchMedia("(pointer: coarse)").matches;
+        dpr = Math.min(window.devicePixelRatio || 1, coarse ? 1.25 : 1.75);
         cssW = Math.max(1, Math.floor(rect.width));
         cssH = Math.max(1, Math.floor(rect.height));
 
@@ -284,7 +287,7 @@ export function ScrollPainting() {
         canvas.style.height = `${cssH}px`;
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-        strokes = buildStrokes(cssW, cssH, 280);
+        strokes = buildStrokes(cssW, cssH, coarse ? 160 : 240);
         lastCount = 0;
         lastSketchCount = 0;
         resetMask(maskCtx, maskCanvas);
@@ -292,7 +295,7 @@ export function ScrollPainting() {
 
         if (img && ready) {
           // Rebuild sketch at display size for sharp facial lines
-          const sw = Math.min(cssW, 520);
+          const sw = Math.min(cssW, coarse ? 360 : 520);
           const sh = Math.round(sw * (IMG_H / IMG_W));
           sketch = createPencilSketch(img, sw, sh);
         }
@@ -429,6 +432,17 @@ export function ScrollPainting() {
       }
 
       const proxy = { p: 0 };
+      let paintRaf = 0;
+      let pendingProgress = 0;
+      const schedulePaint = (progress: number) => {
+        pendingProgress = progress;
+        if (paintRaf) return;
+        paintRaf = requestAnimationFrame(() => {
+          paintRaf = 0;
+          paint(pendingProgress);
+        });
+      };
+
       gsap
         .timeline({
           defaults: { ease: "none" },
@@ -437,18 +451,19 @@ export function ScrollPainting() {
             start: "top top",
             end: "+=560%",
             pin: true,
-            scrub: 0.4,
+            scrub: 0.65,
             anticipatePin: 1,
             onUpdate: (self) => {
               state.progress = self.progress;
               setStage(self.progress);
-              paint(self.progress);
+              schedulePaint(self.progress);
             },
           },
         })
         .to(proxy, { p: 1, duration: 1 });
 
       return () => {
+        cancelAnimationFrame(paintRaf);
         window.removeEventListener("resize", onResize);
         ScrollTrigger.getAll().forEach((st) => {
           if (st.trigger === root) st.kill();
