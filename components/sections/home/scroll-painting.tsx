@@ -11,12 +11,28 @@ const IMG_H = 1495;
 
 const STAGES = [
   { at: 0, label: "01 · Blank paper", copy: "Empty cotton. No mark yet." },
-  { at: 0.08, label: "02 · Contours", copy: "Her true outline begins to appear." },
-  { at: 0.22, label: "03 · Pencil study", copy: "Eyes, lips, freckles — the face is found." },
+  {
+    at: 0.08,
+    label: "02 · Contours",
+    copy: "Her true outline begins to appear.",
+  },
+  {
+    at: 0.22,
+    label: "03 · Pencil study",
+    copy: "Eyes, lips, freckles — the face is found.",
+  },
   { at: 0.4, label: "04 · First color", copy: "Brush finds skin and light." },
-  { at: 0.58, label: "05 · Building form", copy: "Pink feathers bloom around her." },
+  {
+    at: 0.58,
+    label: "05 · Building form",
+    copy: "Pink feathers bloom around her.",
+  },
   { at: 0.78, label: "06 · Detail", copy: "The portrait comes into focus." },
-  { at: 0.92, label: "07 · Complete", copy: "Behind closed eyes, a universe lives…" },
+  {
+    at: 0.92,
+    label: "07 · Complete",
+    copy: "Behind closed eyes, a universe lives…",
+  },
 ];
 
 type Stroke = { x: number; y: number; rx: number; ry: number; rot: number };
@@ -294,7 +310,9 @@ export function ScrollPainting() {
           0,
           Math.min(1, (progress - sketchStart) / (sketchEnd - sketchStart)),
         );
-        const sketchCount = Math.floor(Math.pow(sketchP, 0.75) * strokes.length);
+        const sketchCount = Math.floor(
+          Math.pow(sketchP, 0.75) * strokes.length,
+        );
 
         if (sketchCount < lastSketchCount) {
           resetMask(sketchMaskCtx, sketchMaskCanvas);
@@ -319,7 +337,8 @@ export function ScrollPainting() {
 
           ctx.globalCompositeOperation = "multiply";
           ctx.setTransform(1, 0, 0, 1, 0, 0);
-          ctx.globalAlpha = progress < 0.55 ? 1 : Math.max(0.08, 1 - (progress - 0.55) * 2.2);
+          ctx.globalAlpha =
+            progress < 0.55 ? 1 : Math.max(0.08, 1 - (progress - 0.55) * 2.2);
           ctx.drawImage(layerCanvas, 0, 0);
           ctx.globalAlpha = 1;
           ctx.globalCompositeOperation = "source-over";
@@ -409,22 +428,24 @@ export function ScrollPainting() {
       }
 
       const proxy = { p: 0 };
-      gsap.timeline({
-        defaults: { ease: "none" },
-        scrollTrigger: {
-          trigger: root,
-          start: "top top",
-          end: "+=560%",
-          pin: true,
-          scrub: 0.4,
-          anticipatePin: 1,
-          onUpdate: (self) => {
-            state.progress = self.progress;
-            setStage(self.progress);
-            paint(self.progress);
+      gsap
+        .timeline({
+          defaults: { ease: "none" },
+          scrollTrigger: {
+            trigger: root,
+            start: "top top",
+            end: "+=560%",
+            pin: true,
+            scrub: 0.4,
+            anticipatePin: 1,
+            onUpdate: (self) => {
+              state.progress = self.progress;
+              setStage(self.progress);
+              paint(self.progress);
+            },
           },
-        },
-      }).to(proxy, { p: 1, duration: 1 });
+        })
+        .to(proxy, { p: 1, duration: 1 });
 
       return () => {
         window.removeEventListener("resize", onResize);
