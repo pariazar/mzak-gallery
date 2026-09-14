@@ -45,7 +45,7 @@ export function MenuOverlay() {
         <motion.nav
           id="fullscreen-menu"
           aria-label="Main navigation"
-          className="fixed inset-0 z-[90] flex flex-col justify-between bg-surface pt-28 pb-10"
+          className="fixed inset-0 z-[90] flex flex-col justify-between overflow-y-auto overscroll-contain bg-surface pt-[max(6.5rem,calc(env(safe-area-inset-top)+5rem))] pb-[max(2.5rem,env(safe-area-inset-bottom))]"
           initial={{ y: "-100%" }}
           animate={{ y: 0 }}
           exit={{ y: "-100%" }}
@@ -88,7 +88,7 @@ export function MenuOverlay() {
                     <span className="text-label transition-colors group-hover:text-accent">
                       {padIndex(i)}
                     </span>
-                    <span className="text-display font-display transition-all duration-300 group-hover:translate-x-3 group-hover:italic group-hover:text-accent">
+                    <span className="text-display font-display text-[clamp(2.2rem,10vw,6rem)] transition-all duration-300 group-hover:translate-x-3 group-hover:italic group-hover:text-accent">
                       {link.label}
                     </span>
                   </TransitionLink>

@@ -127,9 +127,9 @@ export function StoryDetail() {
         </div>
       </div>
 
-      <div className="container-x relative z-10 flex h-full flex-col justify-between py-14 md:py-20">
-        <div className="flex items-start justify-between gap-6">
-          <p className="text-label tracking-[0.24em] text-[#f3ebe3]/60">
+      <div className="container-x relative z-10 flex h-full flex-col justify-between py-10 sm:py-14 md:py-20">
+        <div className="flex items-start justify-between gap-4 sm:gap-6">
+          <p className="text-label tracking-[0.18em] text-[#f3ebe3]/60 sm:tracking-[0.24em]">
             Chapter IV — Look closer
           </p>
           <span
@@ -162,17 +162,19 @@ export function StoryDetail() {
           </p>
         </div>
 
-        <div className="max-w-md self-end md:mr-[8%]">
-          <div className="relative min-h-[8.5rem] rounded-sm border border-[#f3ebe3]/10 bg-[#120e0c]/40 p-5 backdrop-blur-[2px]">
+        <div className="w-full max-w-md self-stretch sm:self-end md:mr-[8%]">
+          <div className="relative min-h-[7.5rem] rounded-sm border border-[#f3ebe3]/10 bg-[#120e0c]/40 p-4 backdrop-blur-[2px] sm:min-h-[8.5rem] sm:p-5">
             {BEATS.map((beat, i) => (
               <div
                 key={beat.label}
                 data-beat
-                className="absolute inset-5 top-5"
+                className="absolute inset-4 top-4 sm:inset-5 sm:top-5"
                 aria-hidden={i !== 0}
               >
-                <p className="text-label mb-3 text-[#f3ebe3]/55">{beat.label}</p>
-                <p className="font-display text-[clamp(1.35rem,3vw,2.1rem)] leading-snug text-[#f3ebe3]">
+                <p className="text-label mb-2 text-[#f3ebe3]/55 sm:mb-3">
+                  {beat.label}
+                </p>
+                <p className="font-display text-[clamp(1.15rem,3vw,2.1rem)] leading-snug text-[#f3ebe3]">
                   {beat.copy}
                 </p>
               </div>

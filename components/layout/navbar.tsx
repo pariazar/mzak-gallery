@@ -15,8 +15,8 @@ export function Navbar() {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-[100]">
-        <div className="container-x flex h-20 items-center justify-between">
+      <header className="fixed inset-x-0 top-0 z-[100] pt-[env(safe-area-inset-top)]">
+        <div className="container-x flex h-16 items-center justify-between sm:h-20">
           <TransitionLink
             href="/"
             onClick={() => setMenuOpen(false)}

@@ -123,7 +123,7 @@ export function StoryPigment() {
   return (
     <section
       ref={rootRef}
-      className="relative h-svh overflow-hidden border-t border-border bg-[#120e0c] text-[#f3ebe3]"
+      className="relative min-h-svh overflow-hidden border-t border-border bg-[#120e0c] text-[#f3ebe3] md:h-svh"
       aria-label="Pigment ritual"
     >
       {/* Paper texture */}
@@ -142,7 +142,10 @@ export function StoryPigment() {
           key={rem}
           data-ring
           className="pointer-events-none absolute left-1/2 top-[42%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#f3ebe3]/15"
-          style={{ width: `${rem}rem`, height: `${rem}rem` }}
+          style={{
+            width: `min(${40 + i * 22}vw, ${rem}rem)`,
+            height: `min(${40 + i * 22}vw, ${rem}rem)`,
+          }}
           aria-hidden="true"
         />
       ))}
@@ -176,7 +179,7 @@ export function StoryPigment() {
         <div
           key={i}
           data-stamp
-          className="pointer-events-none absolute size-8 rounded-sm md:size-10"
+          className="pointer-events-none absolute size-7 rounded-sm md:size-10"
           style={{
             left: s.l,
             top: s.t,
@@ -189,20 +192,20 @@ export function StoryPigment() {
 
       {/* Giant watermark letter */}
       <p
-        className="pointer-events-none absolute right-[-2%] top-[8%] select-none font-display text-[clamp(8rem,28vw,22rem)] leading-none text-[#f3ebe3]/5"
+        className="pointer-events-none absolute right-[-2%] top-[8%] select-none font-display text-[clamp(5rem,28vw,22rem)] leading-none text-[#f3ebe3]/5"
         aria-hidden="true"
       >
         色
       </p>
 
-      <div className="container-x relative z-10 flex h-full flex-col justify-between py-16 md:py-24">
+      <div className="container-x relative z-10 flex min-h-svh flex-col justify-between gap-10 py-14 md:h-full md:gap-0 md:py-24">
         <div>
-          <p className="text-label mb-5 tracking-[0.24em] text-[#f3ebe3]/55">
+          <p className="text-label mb-4 tracking-[0.24em] text-[#f3ebe3]/55 md:mb-5">
             Chapter II — The palette
           </p>
           <h2
             data-pigment-title
-            className="max-w-3xl font-display text-[clamp(2.2rem,6vw,5rem)] font-medium leading-[1.05] tracking-[-0.02em]"
+            className="max-w-3xl font-display text-[clamp(1.85rem,6vw,5rem)] font-medium leading-[1.05] tracking-[-0.02em]"
           >
             Four pigments.
             <br />
@@ -210,24 +213,26 @@ export function StoryPigment() {
           </h2>
         </div>
 
-        <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="grid grid-cols-2 gap-4 sm:gap-5 lg:grid-cols-4">
           {PIGMENTS.map((p) => (
             <li
               key={p.name}
               data-pigment-card
-              className="border-t border-[#f3ebe3]/20 pt-5"
+              className="border-t border-[#f3ebe3]/20 pt-4 md:pt-5"
             >
-              <div className="mb-4 flex items-center gap-3">
+              <div className="mb-3 flex items-center gap-2 md:mb-4 md:gap-3">
                 <span
-                  className="size-4 rounded-full"
+                  className="size-3.5 shrink-0 rounded-full md:size-4"
                   style={{
                     background: p.color,
                     boxShadow: `0 0 22px ${p.color}`,
                   }}
                 />
-                <h3 className="font-display text-xl italic">{p.name}</h3>
+                <h3 className="font-display text-base italic md:text-xl">
+                  {p.name}
+                </h3>
               </div>
-              <p className="text-sm leading-relaxed text-[#f3ebe3]/65">
+              <p className="text-xs leading-relaxed text-[#f3ebe3]/65 md:text-sm">
                 {p.copy}
               </p>
             </li>

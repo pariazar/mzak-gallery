@@ -464,35 +464,35 @@ export function ScrollPainting() {
       className="relative z-10 bg-[#1a1410]"
       aria-label="Scroll to draw the painting"
     >
-      <div className="flex h-svh flex-col text-[#f3ebe3]">
-        <div className="container-x flex items-end justify-between gap-6 pt-24 pb-3 md:pt-28">
-          <div>
+      <div className="flex h-svh flex-col overflow-hidden text-[#f3ebe3]">
+        <div className="container-x flex items-end justify-between gap-4 pt-20 pb-2 md:gap-6 md:pt-28 md:pb-3">
+          <div className="min-w-0">
             <p className="mb-2 text-[0.72rem] uppercase tracking-[0.18em] text-[#f3ebe3]/55">
               Scroll to draw
             </p>
-            <h2 className="font-display text-3xl italic md:text-4xl">
+            <h2 className="font-display text-2xl italic sm:text-3xl md:text-4xl">
               From blank paper to portrait
             </h2>
           </div>
           <p
             ref={stageRef}
-            className="hidden text-[0.72rem] uppercase tracking-[0.18em] text-[#e8b4a0] md:block"
+            className="hidden shrink-0 text-[0.72rem] uppercase tracking-[0.18em] text-[#e8b4a0] md:block"
           >
             {STAGES[0].label}
           </p>
         </div>
 
-        <div className="relative mx-auto flex min-h-0 w-full flex-1 items-center justify-center px-[var(--gutter)] py-2">
-          <div className="relative w-full max-w-full">
+        <div className="relative mx-auto flex min-h-0 w-full flex-1 items-center justify-center overflow-hidden px-[var(--gutter)] py-1 md:py-2">
+          <div className="relative w-full max-w-full overflow-hidden">
             <div
-              className="pointer-events-none absolute -inset-10 rounded-full bg-[radial-gradient(circle_at_50%_30%,rgba(255,200,140,0.18),transparent_65%)]"
+              className="pointer-events-none absolute -inset-6 rounded-full bg-[radial-gradient(circle_at_50%_30%,rgba(255,200,140,0.18),transparent_65%)] md:-inset-10"
               aria-hidden="true"
             />
 
             <div
               className="relative mx-auto overflow-hidden rounded-sm shadow-[0_30px_80px_rgba(0,0,0,0.55)] ring-1 ring-[#c9a66b]/35"
               style={{
-                width: "min(100%, calc(66svh * 704 / 1495))",
+                width: "min(100%, calc(72svh * 704 / 1495))",
                 aspectRatio: `${IMG_W} / ${IMG_H}`,
               }}
             >
@@ -512,16 +512,16 @@ export function ScrollPainting() {
               </div>
             </div>
 
-            <p className="mt-4 text-center font-display text-sm italic text-[#f3ebe3]/45">
+            <p className="mt-3 text-center font-display text-xs italic text-[#f3ebe3]/45 sm:mt-4 sm:text-sm">
               Behind closed eyes, a universe lives…
             </p>
           </div>
         </div>
 
-        <div className="container-x pb-8 pt-1">
+        <div className="container-x pb-6 pt-1 md:pb-8">
           <p
             ref={copyRef}
-            className="min-h-[1.5em] font-display text-xl italic text-[#f3ebe3]/85 md:text-2xl"
+            className="min-h-[1.5em] font-display text-lg italic text-[#f3ebe3]/85 sm:text-xl md:text-2xl"
           >
             {STAGES[0].copy}
           </p>

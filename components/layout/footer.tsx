@@ -33,7 +33,7 @@ export function Footer() {
           <SplitTextReveal
             as="p"
             type="words"
-            className="text-display-xl transition-colors duration-500 group-hover:text-accent"
+            className="text-[clamp(2.4rem,10vw,8.5rem)] font-display leading-[0.95] tracking-[-0.02em] transition-colors duration-500 group-hover:text-accent"
           >
             Let&apos;s paint something soft
           </SplitTextReveal>
@@ -86,8 +86,8 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex items-center justify-between text-xs text-muted-foreground">
-          <p>
+        <div className="mt-12 flex flex-col gap-4 text-xs text-muted-foreground sm:mt-16 sm:flex-row sm:items-center sm:justify-between">
+          <p className="min-w-0 pr-2">
             © {year} {siteConfig.legalName}. All rights reserved.
           </p>
           <Magnetic>
@@ -96,7 +96,7 @@ export function Footer() {
               onClick={scrollTop}
               data-cursor="hover"
               aria-label="Back to top"
-              className="flex size-12 items-center justify-center rounded-full border border-border transition-colors hover:border-accent hover:text-accent"
+              className="flex size-12 shrink-0 items-center justify-center rounded-full border border-border transition-colors hover:border-accent hover:text-accent"
             >
               <ArrowUp className="size-4" />
             </button>

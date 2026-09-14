@@ -9,37 +9,42 @@ const TOOLS = [
   {
     id: "palette",
     label: "Porcelain palette",
-    x: "12%",
-    y: "28%",
+    x: "8%",
+    y: "26%",
     rot: -8,
+    mobileOrder: 1,
   },
   {
     id: "brushes",
     label: "Kolinsky set",
-    x: "70%",
-    y: "22%",
+    x: "68%",
+    y: "20%",
     rot: 12,
+    mobileOrder: 2,
   },
   {
     id: "paper",
     label: "Cold-pressed sheet",
-    x: "38%",
-    y: "48%",
+    x: "34%",
+    y: "46%",
     rot: -3,
+    mobileOrder: 0,
   },
   {
     id: "jar",
     label: "Rinse water",
-    x: "78%",
+    x: "72%",
     y: "58%",
     rot: 6,
+    mobileOrder: 3,
   },
   {
     id: "tubes",
     label: "Pigment tubes",
-    x: "18%",
+    x: "14%",
     y: "62%",
     rot: -14,
+    mobileOrder: 4,
   },
 ];
 
@@ -60,8 +65,32 @@ export function StoryAtelierDesk() {
       const shadow = rootRef.current.querySelector("[data-desk-shadow]");
       const title = rootRef.current.querySelector("[data-desk-title]");
       const petals = rootRef.current.querySelectorAll("[data-petal]");
+      const isMobile = window.matchMedia("(max-width: 767px)").matches;
+      // Mobile grid renders tools first; desktop absolute copies follow.
+      const visibleTools = isMobile ? tools.slice(0, 5) : tools.slice(5);
 
-      gsap.set(tools, {
+      if (isMobile) {
+        gsap.set(visibleTools, { opacity: 0, y: 28 });
+        gsap.to(visibleTools, {
+          opacity: 1,
+          y: 0,
+          stagger: 0.1,
+          duration: 0.7,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: rootRef.current,
+            start: "top 70%",
+            once: true,
+          },
+        });
+        return () => {
+          ScrollTrigger.getAll()
+            .filter((st) => st.trigger === rootRef.current)
+            .forEach((st) => st.kill());
+        };
+      }
+
+      gsap.set(visibleTools, {
         opacity: 0,
         y: 80,
         scale: 0.85,
@@ -97,7 +126,7 @@ export function StoryAtelierDesk() {
         );
       }
 
-      tools.forEach((tool, i) => {
+      visibleTools.forEach((tool, i) => {
         tl.to(
           tool,
           {
@@ -119,7 +148,7 @@ export function StoryAtelierDesk() {
       );
 
       tl.to(
-        tools,
+        visibleTools,
         {
           y: (i) => (i % 2 === 0 ? -8 : 6),
           rotation: (i) => (TOOLS[i]?.rot ?? 0) + (i % 2 === 0 ? -2 : 2),
@@ -140,7 +169,7 @@ export function StoryAtelierDesk() {
   return (
     <section
       ref={rootRef}
-      className="relative h-svh overflow-hidden border-t border-border"
+      className="relative overflow-hidden border-t border-border md:h-svh"
       aria-label="Atelier desk"
     >
       <WashField
@@ -150,7 +179,7 @@ export function StoryAtelierDesk() {
 
       <div
         data-desk-shadow
-        className="pointer-events-none absolute bottom-[8%] left-1/2 h-16 w-[min(90%,52rem)] -translate-x-1/2 rounded-[100%] bg-[#1a1410]/25 blur-2xl"
+        className="pointer-events-none absolute bottom-[8%] left-1/2 hidden h-16 w-[min(90%,52rem)] -translate-x-1/2 rounded-[100%] bg-[#1a1410]/25 blur-2xl md:block"
         aria-hidden="true"
       />
 
@@ -159,16 +188,44 @@ export function StoryAtelierDesk() {
           <p className="text-label mb-4 tracking-[0.24em]">
             Chapter — The desk
           </p>
-          <h2 className="max-w-2xl font-display text-[clamp(2rem,5.5vw,4rem)] font-medium leading-[1.05]">
+          <h2 className="max-w-2xl font-display text-[clamp(1.75rem,5.5vw,4rem)] font-medium leading-[1.05]">
             Tools wait like quiet animals.
           </h2>
         </div>
       </div>
 
-      {/* Graphical tools */}
+      {/* Mobile: compact tool grid */}
+      <div className="container-x relative z-20 mt-8 grid grid-cols-2 gap-6 pb-12 sm:grid-cols-3 md:hidden">
+        {[...TOOLS]
+          .sort((a, b) => a.mobileOrder - b.mobileOrder)
+          .map((tool) => (
+            <div
+              key={tool.id}
+              data-tool
+              className="flex flex-col items-center text-center"
+            >
+              <div className="flex h-28 w-full items-center justify-center [&_svg]:max-h-24 [&_svg]:max-w-full">
+                {tool.id === "palette" && <PaletteGraphic />}
+                {tool.id === "brushes" && <BrushesGraphic />}
+                {tool.id === "paper" && (
+                  <div className="w-[min(100%,9rem)]">
+                    <PaperGraphic />
+                  </div>
+                )}
+                {tool.id === "jar" && <JarGraphic />}
+                {tool.id === "tubes" && <TubesGraphic />}
+              </div>
+              <p className="mt-2 text-[0.65rem] uppercase tracking-[0.16em] text-foreground/55">
+                {tool.label}
+              </p>
+            </div>
+          ))}
+      </div>
+
+      {/* Desktop: absolute still-life */}
       <div
         data-tool
-        className="absolute z-20"
+        className="absolute z-20 hidden md:block"
         style={{ left: TOOLS[0].x, top: TOOLS[0].y }}
       >
         <PaletteGraphic />
@@ -179,7 +236,7 @@ export function StoryAtelierDesk() {
 
       <div
         data-tool
-        className="absolute z-20"
+        className="absolute z-20 hidden md:block"
         style={{ left: TOOLS[1].x, top: TOOLS[1].y }}
       >
         <BrushesGraphic />
@@ -190,7 +247,7 @@ export function StoryAtelierDesk() {
 
       <div
         data-tool
-        className="absolute z-20 w-[min(42vw,16rem)]"
+        className="absolute z-20 hidden w-[min(42vw,16rem)] md:block"
         style={{ left: TOOLS[2].x, top: TOOLS[2].y }}
       >
         <PaperGraphic />
@@ -201,7 +258,7 @@ export function StoryAtelierDesk() {
 
       <div
         data-tool
-        className="absolute z-20"
+        className="absolute z-20 hidden md:block"
         style={{ left: TOOLS[3].x, top: TOOLS[3].y }}
       >
         <JarGraphic />
@@ -212,7 +269,7 @@ export function StoryAtelierDesk() {
 
       <div
         data-tool
-        className="absolute z-20"
+        className="absolute z-20 hidden md:block"
         style={{ left: TOOLS[4].x, top: TOOLS[4].y }}
       >
         <TubesGraphic />
@@ -231,7 +288,7 @@ export function StoryAtelierDesk() {
         <div
           key={i}
           data-petal
-          className="pointer-events-none absolute"
+          className="pointer-events-none absolute hidden md:block"
           style={{
             left: p.l,
             top: p.t,

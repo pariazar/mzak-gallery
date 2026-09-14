@@ -20,6 +20,8 @@ export function StoryGalleryWalk() {
   useGSAP(
     () => {
       if (reduced || !rootRef.current || !trackRef.current) return;
+      // Native horizontal swipe is clearer on phones than pin+scrub.
+      if (window.matchMedia("(max-width: 767px)").matches) return;
 
       const track = trackRef.current;
       const getScroll = () =>
@@ -62,28 +64,32 @@ export function StoryGalleryWalk() {
         aria-hidden="true"
       />
 
-      <div className="relative flex h-svh flex-col justify-center">
-        <div className="container-x mb-10 shrink-0 md:mb-14">
+      <div className="relative flex min-h-[min(100svh,52rem)] flex-col justify-center py-10 md:h-svh md:py-0">
+        <div className="container-x mb-8 shrink-0 md:mb-14">
           <p className="text-label mb-4 tracking-[0.24em]">
             Chapter III — Walk the wall
           </p>
           <h2 className="max-w-3xl font-display text-display-sm leading-[1.08]">
             Series hung in silence.
-            <span className="italic text-foreground/70"> Scroll sideways.</span>
+            <span className="italic text-foreground/70">
+              {" "}
+              <span className="md:hidden">Swipe the wall.</span>
+              <span className="hidden md:inline">Scroll sideways.</span>
+            </span>
           </h2>
         </div>
 
-        <div className="overflow-hidden">
+        <div className="overflow-x-auto overscroll-x-contain snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:overflow-hidden">
           <div
             ref={trackRef}
-            className="flex w-max items-end gap-6 px-[max(1.25rem,calc((100vw-72rem)/2+1.25rem))] pb-8 md:gap-10"
+            className="flex w-max items-end gap-5 px-[var(--gutter)] pb-8 md:gap-10 md:px-[max(1.25rem,calc((100vw-72rem)/2+1.25rem))]"
           >
             {works.map((work, i) => (
               <TransitionLink
                 key={work.slug}
                 href={`/work/${work.slug}`}
                 data-cursor="hover"
-                className="group relative block w-[min(72vw,22rem)] shrink-0 md:w-[min(42vw,28rem)]"
+                className="group relative block w-[min(78vw,20rem)] shrink-0 snap-center md:w-[min(42vw,28rem)]"
               >
                 <div className="artwork-mount">
                   <div

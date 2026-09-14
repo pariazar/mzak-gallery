@@ -24,9 +24,9 @@
   --gutter: clamp(1.25rem, 4vw, 4rem);
   --section-y: clamp(5rem, 12vw, 11rem);
 
-  --text-display-xl: clamp(3rem, 9.5vw, 8.5rem);
-  --text-display: clamp(2.4rem, 7vw, 6rem);
-  --text-display-sm: clamp(1.8rem, 4.5vw, 3.5rem);
+  --text-display-xl: clamp(2.4rem, 9.5vw, 8.5rem);
+  --text-display: clamp(2rem, 7vw, 6rem);
+  --text-display-sm: clamp(1.55rem, 4.5vw, 3.5rem);
 
   color-scheme: light;
 }

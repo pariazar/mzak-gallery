@@ -33,9 +33,34 @@ export function StoryInkConstellation() {
       const title = rootRef.current.querySelector("[data-constellation-title]");
       const splatters = rootRef.current.querySelectorAll("[data-splatter]");
 
-      gsap.set(cards, { opacity: 0, scale: 0.4, rotate: 0 });
+      const isMobile = window.matchMedia("(max-width: 767px)").matches;
+      const visibleCards = isMobile ? cards.slice(0, 6) : cards.slice(6);
+
+      // Mobile: light scroll-in, no pin (grid needs natural height).
+      if (isMobile) {
+        gsap.set(visibleCards, { opacity: 0, y: 24 });
+        gsap.to(visibleCards, {
+          opacity: 1,
+          y: 0,
+          stagger: 0.08,
+          duration: 0.7,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: rootRef.current,
+            start: "top 70%",
+            once: true,
+          },
+        });
+        return () => {
+          ScrollTrigger.getAll()
+            .filter((st) => st.trigger === rootRef.current)
+            .forEach((st) => st.kill());
+        };
+      }
+
       gsap.set(lines, { strokeDashoffset: 1200 });
       gsap.set(splatters, { scale: 0, opacity: 0 });
+      gsap.set(visibleCards, { opacity: 0, scale: 0.4, rotate: 0 });
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -57,7 +82,7 @@ export function StoryInkConstellation() {
         );
       }
 
-      cards.forEach((card, i) => {
+      visibleCards.forEach((card, i) => {
         const rot = STUDIES[i]?.rot ?? 0;
         tl.to(
           card,
@@ -79,7 +104,7 @@ export function StoryInkConstellation() {
       );
 
       tl.to(
-        cards,
+        visibleCards,
         {
           x: (i) => (i % 2 === 0 ? 40 : -30),
           y: (i) => (i % 3 === 0 ? -25 : 20),
@@ -92,7 +117,7 @@ export function StoryInkConstellation() {
       tl.to(lines, { strokeDashoffset: 0, duration: 1.6, stagger: 0.1 }, 2.8);
 
       tl.to(
-        cards,
+        visibleCards,
         {
           x: 0,
           y: 0,
@@ -115,7 +140,7 @@ export function StoryInkConstellation() {
   return (
     <section
       ref={rootRef}
-      className="relative h-svh overflow-hidden border-t border-border"
+      className="relative overflow-hidden border-t border-border md:h-svh"
       aria-label="Study constellation"
     >
       <WashField
@@ -125,7 +150,7 @@ export function StoryInkConstellation() {
 
       {/* Constellation connectors */}
       <svg
-        className="pointer-events-none absolute inset-0 h-full w-full"
+        className="pointer-events-none absolute inset-0 hidden h-full w-full md:block"
         viewBox="0 0 100 100"
         preserveAspectRatio="none"
         aria-hidden="true"
@@ -167,23 +192,49 @@ export function StoryInkConstellation() {
         />
       ))}
 
-      <div className="container-x relative z-10 pt-16 md:pt-20">
+      <div className="container-x relative z-10 pt-14 md:pt-20">
         <div data-constellation-title>
           <p className="text-label mb-4 tracking-[0.24em] text-foreground/60">
             Chapter — Studies in air
           </p>
-          <h2 className="max-w-2xl font-display text-[clamp(2rem,5.5vw,4.2rem)] font-medium leading-[1.05]">
+          <h2 className="max-w-2xl font-display text-[clamp(1.75rem,5.5vw,4.2rem)] font-medium leading-[1.05]">
             Six sketches.
             <span className="italic text-foreground/70"> One night sky.</span>
           </h2>
         </div>
       </div>
 
+      {/* Mobile: readable 2-col grid (absolute collage clips on phones) */}
+      <div className="container-x relative z-20 mt-6 grid grid-cols-2 gap-3 pb-10 sm:gap-4 md:hidden">
+        {STUDIES.map((study) => (
+          <div key={study.slug} data-study className="min-w-0">
+            <div className="artwork-mount shadow-[0_12px_28px_rgba(28,36,48,0.18)]">
+              <div
+                className="artwork-mount-inner relative aspect-[4/5] overflow-hidden"
+                style={{ background: study.accent + "33" }}
+              >
+                <Image
+                  src={study.cover}
+                  alt=""
+                  fill
+                  sizes="45vw"
+                  className="object-cover"
+                />
+              </div>
+            </div>
+            <p className="mt-2 truncate text-center font-display text-xs italic text-foreground/70">
+              {study.title}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop: floating constellation collage */}
       {STUDIES.map((study) => (
         <div
-          key={study.slug}
+          key={`desk-${study.slug}`}
           data-study
-          className="absolute z-20"
+          className="absolute z-20 hidden md:block"
           style={{
             left: study.x,
             top: study.y,
@@ -212,13 +263,13 @@ export function StoryInkConstellation() {
 
       {/* Decorative seals */}
       <span
-        className="artist-chop pointer-events-none absolute bottom-[12%] left-[10%] opacity-70"
+        className="artist-chop pointer-events-none absolute bottom-[12%] left-[10%] hidden opacity-70 md:block"
         aria-hidden="true"
       >
         MZ
       </span>
       <span
-        className="artist-chop pointer-events-none absolute right-[14%] top-[38%] rotate-12 opacity-40"
+        className="artist-chop pointer-events-none absolute right-[14%] top-[38%] hidden rotate-12 opacity-40 md:block"
         aria-hidden="true"
       >
         水

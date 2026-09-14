@@ -38,25 +38,28 @@ export function Hero() {
         aria-hidden="true"
       />
 
-      <div className="container-x relative z-10 grid flex-1 items-center gap-12 pb-16 pt-28 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:pb-24 lg:pt-32">
+      <div className="container-x relative z-10 grid flex-1 items-center gap-10 pb-12 pt-24 sm:gap-12 sm:pb-16 sm:pt-28 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:pb-24 lg:pt-32">
         {/* Left: brand + copy */}
         <div>
           <motion.div
-            className="mb-8 flex items-center gap-3"
+            className="mb-6 flex min-w-0 flex-wrap items-center gap-3 sm:mb-8"
             initial={{ opacity: 0, y: 12 }}
             animate={loaderDone ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
           >
-            <span className="artist-chop" aria-hidden="true">
+            <span className="artist-chop shrink-0" aria-hidden="true">
               MZ
             </span>
-            <p className="text-label tracking-[0.22em] text-foreground/70">
-              Watercolor gallery · Atelier MZAK
+            <p className="text-label min-w-0 tracking-[0.14em] text-foreground/70 sm:tracking-[0.22em]">
+              <span className="sm:hidden">Watercolor · MZAK</span>
+              <span className="hidden sm:inline">
+                Watercolor gallery · Atelier MZAK
+              </span>
             </p>
           </motion.div>
 
           <motion.h1
-            className="font-display text-[clamp(4rem,14vw,10.5rem)] font-medium leading-[0.82] tracking-[-0.03em]"
+            className="font-display text-[clamp(2.75rem,18vw,10.5rem)] font-medium leading-[0.82] tracking-[-0.03em]"
             initial={{ opacity: 0, y: 36 }}
             animate={loaderDone ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.95, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
