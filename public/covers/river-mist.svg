@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200">
+  <defs>
+    <filter id="paper-rivermist0">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.07"/></feComponentTransfer>
+    </filter>
+    <filter id="soft-rivermist0">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+    <radialGradient id="edge-rivermist0" cx="50%" cy="50%" r="70%">
+      <stop offset="55%" stop-color="#e6e1d6" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#cfc8ba" stop-opacity="0.5"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="1200" fill="#e6e1d6"/>
+  <g filter="url(#soft-rivermist0)" opacity="0.98">
+    
+        <ellipse cx="1070.3079129569232" cy="220.17048792913556" rx="642.3066008440219" ry="161.6589343736414" fill="#1e4d8c" opacity="0.45" transform="rotate(-12.800127547234297 1070.3079129569232 220.17048792913556)"/>
+        <ellipse cx="1350.439169164747" cy="456.7375103244558" rx="487.0482791075483" ry="196.06437776377425" fill="#4a7eb8" opacity="0.35" transform="rotate(-26.136853764764965 1350.439169164747 456.7375103244558)"/>
+        <ellipse cx="1278.2229408621788" cy="591.5310903685167" rx="436.351404968882" ry="137.51467768801376" fill="#1f7a6c" opacity="0.22" transform="rotate(7.984728324227035 1278.2229408621788 591.5310903685167)"/>
+        <path d="M 100 700 Q 800 520 1500 680" fill="none" stroke="#1e4d8c" stroke-width="28" stroke-opacity="0.28" stroke-linecap="round"/>
+      
+    <ellipse cx="1097.1001945436" cy="767.1741682570428" rx="222.41848802240565" ry="257.9080965395551" fill="#1e4d8c" opacity="0.22" transform="rotate(23.894347515888512 1097.1001945436 767.1741682570428)"/>
+    <ellipse cx="888.4216205216944" cy="295.5234992550686" rx="306.1905062031001" ry="172.17534463619813" fill="#4a7eb8" opacity="0.18" transform="rotate(12.39578910637647 888.4216205216944 295.5234992550686)"/>
+  </g>
+  <circle cx="1464.2095794156194" cy="378.1784967519343" r="5.248901317524724" fill="#1e4d8c" opacity="0.19880083190510048"/>
+<circle cx="184.5142601057887" cy="940.2891828119755" r="5.108839170704596" fill="#1e4d8c" opacity="0.269190800213255"/>
+<circle cx="1024.9020782485604" cy="99.96479665860534" r="2.2926105523249136" fill="#1e4d8c" opacity="0.2942840886535123"/>
+<circle cx="945.218844525516" cy="924.9086756817997" r="1.8390694377478212" fill="#1e4d8c" opacity="0.4754247729550115"/>
+<circle cx="1491.69807177037" cy="136.36215575039387" r="1.4136180986417457" fill="#1e4d8c" opacity="0.21259957028087229"/>
+<circle cx="849.932628646493" cy="228.81775945425034" r="3.026848616357893" fill="#1e4d8c" opacity="0.4193472809274681"/>
+<circle cx="457.14952275156975" cy="288.52352008223534" r="4.870373242814094" fill="#1e4d8c" opacity="0.4375631573260762"/>
+<circle cx="356.00450675934553" cy="814.2188543081284" r="1.8357841497519984" fill="#1e4d8c" opacity="0.20349849954945964"/>
+<circle cx="854.6519801020622" cy="191.76086148247123" r="2.291204495402053" fill="#1e4d8c" opacity="0.2991172815673053"/>
+<circle cx="1348.2601080834866" cy="1053.4569718502462" r="2.370040286611766" fill="#1e4d8c" opacity="0.41102711772546174"/>
+<circle cx="1502.1085919812322" cy="98.48305439576507" r="2.7914540943922477" fill="#1e4d8c" opacity="0.49323278648080304"/>
+<circle cx="1173.647477440536" cy="352.2104014828801" r="2.6530977183021607" fill="#1e4d8c" opacity="0.3176671196706593"/>
+<circle cx="287.73203458637" cy="519.9413783475757" r="1.5369187640491873" fill="#1e4d8c" opacity="0.29789687247248364"/>
+<circle cx="1313.5959116742015" cy="471.64000652730465" r="4.849272615672089" fill="#1e4d8c" opacity="0.31146858917782083"/>
+  <rect width="1600" height="1200" fill="url(#edge-rivermist0)"/>
+  <rect width="1600" height="1200" filter="url(#paper-rivermist0)"/>
+</svg>

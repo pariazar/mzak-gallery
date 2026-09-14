@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200">
+  <defs>
+    <filter id="paper-rivermist1">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.07"/></feComponentTransfer>
+    </filter>
+    <filter id="soft-rivermist1">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+    <radialGradient id="edge-rivermist1" cx="50%" cy="50%" r="70%">
+      <stop offset="55%" stop-color="#e6e1d6" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#cfc8ba" stop-opacity="0.5"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="1200" fill="#e6e1d6"/>
+  <g filter="url(#soft-rivermist1)" opacity="0.98">
+    
+        <ellipse cx="523.7145548686385" cy="496.2555304868147" rx="391.5648037497885" ry="438.19384335796343" fill="#1e4d8c" opacity="0.5" transform="rotate(-1.7356248339638114 523.7145548686385 496.2555304868147)"/>
+        <ellipse cx="1029.6453398652375" cy="547.6897501386702" rx="435.5663294408005" ry="328.3101407967042" fill="#4a7eb8" opacity="0.35" transform="rotate(-24.087700922973454 1029.6453398652375 547.6897501386702)"/>
+        <ellipse cx="1296.3665791787207" cy="529.6807833714411" rx="179.09706732840277" ry="211.4344049594365" fill="#1f7a6c" opacity="0.22" transform="rotate(-0.7731301942840219 1296.3665791787207 529.6807833714411)"/>
+        <path d="M 100 740 Q 800 550 1500 730" fill="none" stroke="#1e4d8c" stroke-width="28" stroke-opacity="0.28" stroke-linecap="round"/>
+      
+    <ellipse cx="1074.5111904107034" cy="729.0424918290228" rx="499.45416571595706" ry="324.1903469541576" fill="#1e4d8c" opacity="0.22" transform="rotate(-1.4021731540560722 1074.5111904107034 729.0424918290228)"/>
+    <ellipse cx="1283.3447994664311" cy="572.5311198737472" rx="362.5431280550547" ry="318.1790174632333" fill="#4a7eb8" opacity="0.18" transform="rotate(19.374558348208666 1283.3447994664311 572.5311198737472)"/>
+  </g>
+  <circle cx="223.892038539052" cy="1016.0463210567832" r="1.8638847284484654" fill="#1e4d8c" opacity="0.22289688248420134"/>
+<circle cx="224.99019157141447" cy="990.9104970283806" r="1.9772327702259644" fill="#1e4d8c" opacity="0.4450402790098451"/>
+<circle cx="1377.2817745804787" cy="311.24512009322643" r="3.279502152744681" fill="#1e4d8c" opacity="0.15076847383752465"/>
+<circle cx="450.7679721713066" cy="549.3702059052885" r="2.6451766919810327" fill="#1e4d8c" opacity="0.1513386377948336"/>
+<circle cx="762.6525595784187" cy="802.1709730103612" r="3.914058049838059" fill="#1e4d8c" opacity="0.41735026570968325"/>
+<circle cx="598.638235963881" cy="766.3349649123847" r="1.4255209889262914" fill="#1e4d8c" opacity="0.2762859339592978"/>
+<circle cx="1501.6081343591213" cy="1029.9349597096443" r="5.2970214852131905" fill="#1e4d8c" opacity="0.1918352564331144"/>
+<circle cx="921.8173252418637" cy="227.9753215610981" r="1.626423042663373" fill="#1e4d8c" opacity="0.24980804263614118"/>
+<circle cx="1276.218545846641" cy="207.56811328232288" r="3.78395341958385" fill="#1e4d8c" opacity="0.2981754256179556"/>
+<circle cx="706.2888416275382" cy="152.09773877635598" r="1.7532055275980383" fill="#1e4d8c" opacity="0.4993073007208295"/>
+<circle cx="1313.697274029255" cy="555.6045710295439" r="3.5070181352086367" fill="#1e4d8c" opacity="0.23580703490879384"/>
+<circle cx="321.1983745545149" cy="891.1369007267058" r="2.584918233496137" fill="#1e4d8c" opacity="0.19846862583654"/>
+<circle cx="466.49104721844196" cy="588.5753962956369" r="3.5170208354713397" fill="#1e4d8c" opacity="0.27379530733451246"/>
+<circle cx="812.5094664469361" cy="489.8775229230523" r="2.457468198076822" fill="#1e4d8c" opacity="0.20694254785776137"/>
+<circle cx="1300.1290987804532" cy="214.1944432258606" r="2.887097114394419" fill="#1e4d8c" opacity="0.18704681700328363"/>
+<circle cx="1342.5169084966183" cy="422.32131155207753" r="5.211301241931506" fill="#1e4d8c" opacity="0.28636475518578663"/>
+<circle cx="662.9802523553371" cy="767.3208914510906" r="4.568107312708162" fill="#1e4d8c" opacity="0.39538472617277876"/>
+  <rect width="1600" height="1200" fill="url(#edge-rivermist1)"/>
+  <rect width="1600" height="1200" filter="url(#paper-rivermist1)"/>
+</svg>

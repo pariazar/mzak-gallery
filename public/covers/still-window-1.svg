@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200">
+  <defs>
+    <filter id="paper-stillwindow1">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.07"/></feComponentTransfer>
+    </filter>
+    <filter id="soft-stillwindow1">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+    <radialGradient id="edge-stillwindow1" cx="50%" cy="50%" r="70%">
+      <stop offset="55%" stop-color="#e6e1d6" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#cfc8ba" stop-opacity="0.5"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="1200" fill="#e6e1d6"/>
+  <g filter="url(#soft-stillwindow1)" opacity="0.98">
+    
+        <rect x="500" y="220" width="260" height="620" rx="4" fill="#e07060" opacity="0.4"/>
+        <rect x="520" y="240" width="40" height="560" fill="#c43c2e" opacity="0.22"/>
+        <ellipse cx="343.744966480881" cy="384.1860994230956" rx="187.27709883078933" ry="156.03635877091438" fill="#c43c2e" opacity="0.32" transform="rotate(19.672246822156012 343.744966480881 384.1860994230956)"/>
+        <ellipse cx="654.8706144094467" cy="197.41856614127755" rx="181.32900966634043" ry="213.37063499330543" fill="#1e4d8c" opacity="0.2" transform="rotate(9.303617519326508 654.8706144094467 197.41856614127755)"/>
+      
+    <ellipse cx="486.93298315629363" cy="959.4563741935417" rx="288.8553926597815" ry="372.7254026841838" fill="#c43c2e" opacity="0.22" transform="rotate(-28.409131737425923 486.93298315629363 959.4563741935417)"/>
+    <ellipse cx="1334.6310609951615" cy="546.0991499014199" rx="319.3055903920904" ry="275.5045338058844" fill="#e07060" opacity="0.18" transform="rotate(-6.877137813717127 1334.6310609951615 546.0991499014199)"/>
+  </g>
+  <circle cx="411.83209773153067" cy="285.2372233942151" r="5.487773107644171" fill="#c43c2e" opacity="0.2878611135529354"/>
+<circle cx="1179.1895160451531" cy="433.5413821414113" r="2.3292607655050235" fill="#c43c2e" opacity="0.16725009575020522"/>
+<circle cx="841.7316307500005" cy="336.50603080168366" r="3.0946582758799197" fill="#c43c2e" opacity="0.4593955755699426"/>
+<circle cx="1347.2772578522563" cy="211.32258739322424" r="4.339341353788041" fill="#c43c2e" opacity="0.3006306404480711"/>
+<circle cx="889.1560362279415" cy="783.8084670342505" r="2.3281678093364464" fill="#c43c2e" opacity="0.33456553746946155"/>
+<circle cx="899.6781088411808" cy="258.5717503912747" r="2.22637317229528" fill="#c43c2e" opacity="0.23785380086628718"/>
+<circle cx="846.2202210351825" cy="383.7948516383767" r="5.363466303725727" fill="#c43c2e" opacity="0.3990819770027883"/>
+<circle cx="758.3796051517129" cy="476.50666389614344" r="5.517700363928452" fill="#c43c2e" opacity="0.45107258447678755"/>
+<circle cx="431.8496257811785" cy="675.9543327055871" r="1.668114269664511" fill="#c43c2e" opacity="0.43595247651683167"/>
+<circle cx="683.118854649365" cy="1073.645652551204" r="1.4328194043366238" fill="#c43c2e" opacity="0.2776094111381099"/>
+<circle cx="753.4452075883746" cy="370.74061581864953" r="1.6242922905832529" fill="#c43c2e" opacity="0.41974189080065116"/>
+<circle cx="1467.0859280601144" cy="140.52490912377834" r="4.396902357623913" fill="#c43c2e" opacity="0.31712494924431667"/>
+<circle cx="236.88383858650923" cy="815.778771750629" r="4.218979588989169" fill="#c43c2e" opacity="0.4206954934750683"/>
+<circle cx="1380.018074028194" cy="88.22672633454204" r="3.8679064611671494" fill="#c43c2e" opacity="0.19168827821267767"/>
+<circle cx="122.30012126266956" cy="805.8938294276595" r="3.073804849921726" fill="#c43c2e" opacity="0.48710840700659896"/>
+<circle cx="1269.9988048896194" cy="716.4584302715957" r="2.618725457042456" fill="#c43c2e" opacity="0.4589442320982925"/>
+<circle cx="1198.6404492333531" cy="495.5475502088666" r="3.2193146774545314" fill="#c43c2e" opacity="0.38334815033013"/>
+  <rect width="1600" height="1200" fill="url(#edge-stillwindow1)"/>
+  <rect width="1600" height="1200" filter="url(#paper-stillwindow1)"/>
+</svg>

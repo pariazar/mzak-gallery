@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200">
+  <defs>
+    <filter id="paper-softhorizon1">
+      <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="linear" slope="0.07"/></feComponentTransfer>
+    </filter>
+    <filter id="soft-softhorizon1">
+      <feGaussianBlur stdDeviation="18"/>
+    </filter>
+    <radialGradient id="edge-softhorizon1" cx="50%" cy="50%" r="70%">
+      <stop offset="55%" stop-color="#e6e1d6" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#cfc8ba" stop-opacity="0.5"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="1200" fill="#e6e1d6"/>
+  <g filter="url(#soft-softhorizon1)" opacity="0.98">
+    
+        <ellipse cx="800" cy="750" rx="700" ry="180" fill="#2d6b4f" opacity="0.45"/>
+        <ellipse cx="800" cy="620" rx="650" ry="90" fill="#c9a227" opacity="0.35"/>
+        <ellipse cx="879.9896483309567" cy="659.2919573653489" rx="320.1830341096502" ry="238.29555867076851" fill="#1e4d8c" opacity="0.25" transform="rotate(25.737796858884394 879.9896483309567 659.2919573653489)"/>
+        <ellipse cx="958.2338966429234" cy="462.90705415885895" rx="328.069889690727" ry="318.2184224203229" fill="#2d6b4f" opacity="0.3" transform="rotate(23.67021602578461 958.2338966429234 462.90705415885895)"/>
+      
+    <ellipse cx="405.3897622041404" cy="391.00816666614264" rx="198.72798504238017" ry="272.9156792706344" fill="#2d6b4f" opacity="0.22" transform="rotate(3.6543394764885306 405.3897622041404 391.00816666614264)"/>
+    <ellipse cx="310.80028247088194" cy="736.5846087690443" rx="136.2195798335597" ry="333.435929780826" fill="#c9a227" opacity="0.18" transform="rotate(-16.44446996971965 310.80028247088194 736.5846087690443)"/>
+  </g>
+  <circle cx="988.0564794689417" cy="640.901025608182" r="3.328022407530807" fill="#2d6b4f" opacity="0.23831723259063436"/>
+<circle cx="847.7612916007638" cy="864.5600373670459" r="5.443413181160577" fill="#2d6b4f" opacity="0.1848404508898966"/>
+<circle cx="331.19205333292484" cy="516.3859017007053" r="1.4312563910381868" fill="#2d6b4f" opacity="0.31496532140299677"/>
+<circle cx="641.4104498177767" cy="733.1812324002385" r="2.4019634479656817" fill="#2d6b4f" opacity="0.23536200647940858"/>
+<circle cx="850.0850505381823" cy="523.8632857427001" r="4.323697582399473" fill="#2d6b4f" opacity="0.29930007659131663"/>
+<circle cx="375.95397006720304" cy="642.632108014077" r="5.352706764754839" fill="#2d6b4f" opacity="0.23195287368725984"/>
+<circle cx="126.860516294837" cy="862.5588587298989" r="5.541474700835534" fill="#2d6b4f" opacity="0.4342707499745302"/>
+<circle cx="1469.0970715135336" cy="480.1682964153588" r="2.454919585073367" fill="#2d6b4f" opacity="0.469182180671487"/>
+<circle cx="1362.593493759632" cy="691.7221608199179" r="4.413652544422075" fill="#2d6b4f" opacity="0.15515402907039968"/>
+<circle cx="515.0159721076488" cy="702.0966001227498" r="3.169668332836591" fill="#2d6b4f" opacity="0.4059933523414656"/>
+<circle cx="256.9903985410929" cy="353.6364022269845" r="3.2352971783140676" fill="#2d6b4f" opacity="0.38355211868183686"/>
+<circle cx="162.2882517799735" cy="414.1574554517865" r="1.4259491973090916" fill="#2d6b4f" opacity="0.15571887445403262"/>
+<circle cx="501.3848480954766" cy="113.66041468456388" r="2.2698276394978167" fill="#2d6b4f" opacity="0.2785495293792337"/>
+<circle cx="1217.107665501535" cy="323.1281835027039" r="2.297040843917057" fill="#2d6b4f" opacity="0.2001496081240475"/>
+<circle cx="605.6405301764607" cy="1098.2524965889752" r="4.748393253120594" fill="#2d6b4f" opacity="0.48929161736741655"/>
+<circle cx="1161.2035102024674" cy="189.58729093894362" r="3.331686478969641" fill="#2d6b4f" opacity="0.2598981913179159"/>
+<circle cx="88.21664020419121" cy="812.2270163707435" r="3.63608948844485" fill="#2d6b4f" opacity="0.3213280486990697"/>
+  <rect width="1600" height="1200" fill="url(#edge-softhorizon1)"/>
+  <rect width="1600" height="1200" filter="url(#paper-softhorizon1)"/>
+</svg>

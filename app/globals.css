@@ -1,0 +1,525 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* ────────────────────────────────────────────────────────────────
+   DESIGN TOKENS — stained paper + rich pigment (gallery watercolor)
+   ──────────────────────────────────────────────────────────────── */
+:root {
+  --background: #e6e1d6;
+  --surface: #efe9dc;
+  --surface-2: #d9d2c4;
+  --foreground: #1c2430;
+  --muted-foreground: #5a6573;
+  --border: rgba(28, 36, 48, 0.14);
+  --accent: #1e4d8c;
+  --accent-foreground: #efe9dc;
+  --destructive: #c43c2e;
+  --pigment-red: #c43c2e;
+  --pigment-green: #2d6b4f;
+  --pigment-ochre: #c9a227;
+  --pigment-teal: #1f7a6c;
+
+  --radius: 0.2rem;
+
+  --gutter: clamp(1.25rem, 4vw, 4rem);
+  --section-y: clamp(5rem, 12vw, 11rem);
+
+  --text-display-xl: clamp(3rem, 9.5vw, 8.5rem);
+  --text-display: clamp(2.4rem, 7vw, 6rem);
+  --text-display-sm: clamp(1.8rem, 4.5vw, 3.5rem);
+
+  color-scheme: light;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-foreground: var(--foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+
+  --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+
+  --radius-DEFAULT: var(--radius);
+
+  --animate-marquee: marquee var(--marquee-duration, 30s) linear infinite;
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: var(--surface-2) var(--background);
+  }
+
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--accent) 35%, white);
+    color: var(--foreground);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+}
+
+@utility container-x {
+  padding-inline: var(--gutter);
+  margin-inline: auto;
+  width: 100%;
+  max-width: 100rem;
+}
+
+@utility section-y {
+  padding-block: var(--section-y);
+}
+
+@utility text-display-xl {
+  font-family: var(--font-display);
+  font-size: var(--text-display-xl);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  font-weight: 480;
+}
+
+@utility text-display {
+  font-family: var(--font-display);
+  font-size: var(--text-display);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-weight: 480;
+}
+
+@utility text-display-sm {
+  font-family: var(--font-display);
+  font-size: var(--text-display-sm);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  font-weight: 480;
+}
+
+@utility text-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+@utility link-underline {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  &:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+/* Paper fiber — stronger tooth, like cold-pressed cotton */
+.grain-overlay {
+  position: fixed;
+  inset: -25%;
+  z-index: 200;
+  pointer-events: none;
+  contain: strict;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 128 128' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+  opacity: 0.07;
+  mix-blend-mode: multiply;
+  animation: grain-shift 12s steps(2) infinite;
+}
+
+@keyframes grain-shift {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-2%, 3%);
+  }
+  50% {
+    transform: translate(3%, -2%);
+  }
+  75% {
+    transform: translate(-3%, -3%);
+  }
+  100% {
+    transform: translate(2%, 2%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grain-overlay {
+    animation: none;
+  }
+  .hero-float-a,
+  .hero-float-b,
+  .hero-float-c,
+  .hero-petal,
+  .pigment-swatch {
+    animation: none !important;
+  }
+}
+
+.poster-gradient {
+  background:
+    radial-gradient(
+      50% 60% at 78% 18%,
+      color-mix(in oklab, #1e4d8c 40%, transparent),
+      transparent 68%
+    ),
+    radial-gradient(
+      45% 50% at 18% 72%,
+      color-mix(in oklab, #c43c2e 32%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      40% 40% at 55% 55%,
+      color-mix(in oklab, #1f7a6c 28%, transparent),
+      transparent 65%
+    ),
+    #e6e1d6;
+}
+
+/* Gallery mount — wood frame + mat */
+.gallery-frame {
+  padding: 0.65rem;
+  background: linear-gradient(145deg, #3a3228, #1f1a14 40%, #4a3f32);
+  box-shadow:
+    0 24px 60px rgba(28, 36, 48, 0.28),
+    inset 0 0 0 1px rgba(255, 240, 210, 0.12);
+}
+.gallery-mat {
+  padding: clamp(0.85rem, 2vw, 1.4rem);
+  background: #f3eee4;
+  box-shadow: inset 0 0 0 1px rgba(28, 36, 48, 0.08);
+}
+
+.artist-chop {
+  display: inline-flex;
+  height: 1.75rem;
+  min-width: 1.75rem;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 0.35rem;
+  border: 1.5px solid var(--pigment-red);
+  color: var(--pigment-red);
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-style: italic;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  transform: rotate(-6deg);
+}
+
+.pigment-swatch {
+  display: block;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50% 45% 55% 50%;
+  box-shadow:
+    inset 0 -6px 10px rgba(0, 0, 0, 0.18),
+    0 4px 10px rgba(28, 36, 48, 0.12);
+  animation: swatch-breathe 5s ease-in-out infinite;
+}
+@keyframes swatch-breathe {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+.section-wash {
+  position: relative;
+  isolation: isolate;
+}
+.section-wash::before {
+  content: "";
+  position: absolute;
+  inset: 8% -5% auto auto;
+  width: min(42vw, 28rem);
+  height: min(42vw, 22rem);
+  border-radius: 60% 40% 55% 45%;
+  background: radial-gradient(
+    circle,
+    color-mix(in oklab, var(--accent) 22%, transparent),
+    transparent 70%
+  );
+  filter: blur(8px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.artwork-mount {
+  padding: 0.55rem;
+  background: var(--surface);
+  box-shadow:
+    0 1px 0 rgba(28, 36, 48, 0.06),
+    0 18px 40px rgba(28, 36, 48, 0.1);
+}
+.artwork-mount-inner {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-2);
+  box-shadow: inset 0 0 0 1px rgba(28, 36, 48, 0.06);
+}
+
+/* ────────────────────────────────────────────────────────────────
+   HERO WASH — floating pigment motion
+   ──────────────────────────────────────────────────────────────── */
+.hero-float-a {
+  animation: hero-drift 18s ease-in-out infinite;
+  transform-origin: 1180px 220px;
+}
+.hero-float-b {
+  animation: hero-drift 22s ease-in-out infinite reverse;
+  transform-origin: 400px 440px;
+}
+.hero-float-c {
+  animation: hero-drift 26s ease-in-out infinite;
+  transform-origin: 1100px 680px;
+  animation-delay: -6s;
+}
+
+@keyframes hero-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(14px, -18px) scale(1.03);
+  }
+}
+
+.hero-petal {
+  position: absolute;
+  width: 12px;
+  height: 16px;
+  border-radius: 60% 60% 55% 55%;
+  opacity: 0.65;
+  animation: hero-petal-fall linear infinite;
+}
+.hero-petal-1 {
+  left: 10%;
+  top: -5%;
+  background: #c43c2e;
+  animation-duration: 14s;
+}
+.hero-petal-2 {
+  left: 42%;
+  top: -8%;
+  width: 9px;
+  height: 12px;
+  background: #1e4d8c;
+  animation-duration: 18s;
+  animation-delay: -4s;
+}
+.hero-petal-3 {
+  left: 68%;
+  top: -6%;
+  background: #1f7a6c;
+  animation-duration: 16s;
+  animation-delay: -8s;
+}
+.hero-petal-4 {
+  left: 84%;
+  top: -4%;
+  width: 10px;
+  height: 14px;
+  background: #c9a227;
+  animation-duration: 20s;
+  animation-delay: -2s;
+}
+.hero-petal-5 {
+  left: 28%;
+  top: -7%;
+  width: 8px;
+  height: 11px;
+  background: #2d6b4f;
+  animation-duration: 17s;
+  animation-delay: -6s;
+}
+
+@keyframes hero-petal-fall {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.65;
+  }
+  100% {
+    transform: translate3d(-50px, 110vh, 0) rotate(300deg);
+    opacity: 0;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────────
+   PRELOADER — atelier ink awakening
+   ──────────────────────────────────────────────────────────────── */
+.preloader-paper {
+  background:
+    radial-gradient(
+      80% 60% at 50% 40%,
+      rgba(243, 235, 227, 0.07),
+      transparent 70%
+    ),
+    #1a1410;
+}
+
+.preloader-bloom {
+  filter: blur(2px);
+  mix-blend-mode: screen;
+  will-change: transform, opacity;
+}
+
+.preloader-drip {
+  will-change: transform;
+}
+
+.preloader-grain {
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 128 128' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+  animation: grain-shift 8s steps(2) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .preloader-bloom,
+  .preloader-grain {
+    animation: none !important;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────────
+   SCROLL STORY — Apple-paced narrative chapters
+   ──────────────────────────────────────────────────────────────── */
+.story-prologue {
+  background:
+    radial-gradient(
+      70% 55% at 50% 40%,
+      color-mix(in oklab, var(--background) 70%, #1e4d8c),
+      var(--background)
+    );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .story-prologue {
+    height: auto;
+    min-height: 0;
+    padding-block: var(--section-y);
+  }
+  .story-prologue .story-chapters {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2.25rem;
+  }
+  .story-prologue [data-chapter] {
+    position: relative !important;
+    inset: auto !important;
+    top: auto !important;
+    transform: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
+  .story-prologue .story-ink,
+  .story-prologue .story-scroll-hint {
+    display: none;
+  }
+
+  [data-pigment-bloom],
+  [data-pigment-card],
+  [data-beat],
+  [data-line],
+  [data-word],
+  [data-sub],
+  [data-cta] {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+}
+
+/* ────────────────────────────────────────────────────────────────
+   ART SEPARATORS — painted chapter breaks
+   ──────────────────────────────────────────────────────────────── */
+.art-separator {
+  margin-block: -1px;
+  pointer-events: none;
+  background: transparent;
+}
+
+.art-separator-svg {
+  display: block;
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .art-separator-svg {
+    animation: art-sep-breathe 10s ease-in-out infinite;
+  }
+}
+
+@keyframes art-sep-breathe {
+  0%,
+  100% {
+    opacity: 0.92;
+    filter: saturate(1);
+  }
+  50% {
+    opacity: 1;
+    filter: saturate(1.08);
+  }
+}
+
