@@ -20,3 +20,10 @@ export function lerp(start: number, end: number, amount: number) {
 export function padIndex(i: number) {
   return String(i + 1).padStart(2, "0");
 }
+
+/** Public asset URL with GitHub Pages basePath (for canvas / raw img loads). */
+export function assetPath(path: string) {
+  if (/^https?:\/\//.test(path) || path.startsWith("data:")) return path;
+  const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+  return `${base}${path.startsWith("/") ? path : `/${path}`}`;
+}

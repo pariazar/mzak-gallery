@@ -3,8 +3,9 @@
 import { useRef } from "react";
 import { gsap, useGSAP, ScrollTrigger } from "@/lib/gsap";
 import { useReducedMotion } from "@/lib/hooks/use-reduced-motion";
+import { assetPath } from "@/lib/utils";
 
-const PAINT_SRC = "/covers/paint.jpeg";
+const PAINT_SRC = assetPath("/covers/paint.jpeg");
 /** Native pixel size of paint.jpeg */
 const IMG_W = 704;
 const IMG_H = 1495;

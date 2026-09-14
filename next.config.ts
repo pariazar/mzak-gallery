@@ -14,7 +14,10 @@ const nextConfig: NextConfig = {
     : {}),
   poweredByHeader: false,
   images: {
-    unoptimized: isGithubPages,
+    // Custom loader prefixes NEXT_PUBLIC_BASE_PATH — next/image does not
+    // reliably apply basePath when unoptimized/static-exported.
+    loader: "custom",
+    loaderFile: "./lib/image-loader.ts",
     // Demo covers are local, self-generated SVGs (scripts/generate-covers.mjs).
     // Safe to allow; remove if client projects use raster imagery only.
     dangerouslyAllowSVG: true,
